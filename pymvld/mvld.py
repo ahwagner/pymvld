@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from typing import Tuple
 
 
 @dataclass(frozen=True)
@@ -7,8 +8,8 @@ class AlleleDescriptive:
     gene: str
     chromosome: str
     dna_position: str
-    refseq_transcript: str
-    refseq_protein: str
+    refseq_transcript: Tuple[str]
+    refseq_protein: Tuple[str]
 
 
 @dataclass
