@@ -1,6 +1,5 @@
 import pytest
 from pymvld.mvld import *
-from dataclasses import FrozenInstanceError
 
 
 @pytest.fixture
