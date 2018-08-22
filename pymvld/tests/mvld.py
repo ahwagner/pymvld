@@ -39,6 +39,24 @@ class TestAlleleDescriptive():
         assert ('NM_004333.4',) == ad.refseq_transcript
         assert ('NP_004324.2',) == ad.refseq_protein
 
+    def test_genome_version(self, ad_v600e):
+        # Expecting a string
+        with pytest.raises(TypeError):
+            ad_v600e['genome_version'] = 37
+            AlleleDescriptive(**ad_v600e)
+        # Expecting format of GRCh37, GRCh38
+        with pytest.raises(ValueError):
+            ad_v600e['genome_version'] = 'HG19'
+            AlleleDescriptive(**ad_v600e)
+        # Case sensitive
+        with pytest.raises(ValueError):
+            ad_v600e['genome_version'] = 'grch37'
+            AlleleDescriptive(**ad_v600e)
+        # Expecting human reference
+        with pytest.raises(ValueError):
+            ad_v600e['genome_version'] = 'mm9'
+            AlleleDescriptive(**ad_v600e)
+
 
 class TestAlleleInterpretive():
     def test_instantiate(self):
