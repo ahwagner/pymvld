@@ -27,18 +27,17 @@ class TestAlleleDescriptive():
     def test_protein_string_to_tuple(self, ad_v600e):
         ad_v600e['refseq_protein'] = 'NP_004324'
         ad = AlleleDescriptive(**ad_v600e)
-        assert ad.refseq_protein == ('NP_004324',)
+        assert ('NP_004324',) == ad.refseq_protein
 
     def test_transcript_string_to_tuple(self, ad_v600e):
         ad_v600e['refseq_transcript'] = 'NM_004333'
         ad = AlleleDescriptive(**ad_v600e)
-        assert ad.refseq_transcript == ('NM_004333',)
+        assert ('NM_004333',) == ad.refseq_transcript
 
     def test_lists_to_tuple(self, ad_v600e):
-        ad_v600e['refseq_transcript'] = 'NM_004333'
         ad = AlleleDescriptive(**ad_v600e)
-        assert ad.refseq_protein == ('NP_004324.2',)
-        assert ad.refseq_transcript == ('NM_004333.4',)
+        assert ('NM_004333.4',) == ad.refseq_transcript
+        assert ('NP_004324.2',) == ad.refseq_protein
 
 
 class TestAlleleInterpretive():
