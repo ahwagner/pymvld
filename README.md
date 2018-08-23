@@ -4,7 +4,7 @@ pyMVLD is a Python implementation of the Minimum Variant Level Data framework of
 ![MVLD Figure](https://media.springernature.com/full/springer-static/image/art%3A10.1186%2Fs13073-016-0367-z/MediaObjects/13073_2016_367_Fig3_HTML.gif)
 
 ## Why use pyMVLD
-pyMVLD is an implementation for ensuring compliance with the MVLD framework. Use of this module provides:
+pyMVLD is an implementation of the MVLD framework for ensuring compliance. Use of this module provides:
 * Validation of correct data types and values when generating MVLD objects
 * Immutable, standardized objects for downstream applications
 * Framework versioning
