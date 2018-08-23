@@ -38,6 +38,34 @@ class TestAlleleDescriptive():
         assert ('NM_004333.4',) == ad.refseq_transcript
         assert ('NP_004324.2',) == ad.refseq_protein
 
+    def test_valid_protein_reference_format(self, ad_v600e):
+        # All entries start with NP_*
+        with pytest.raises(AssertionError):
+            ad_v600e['refseq_protein'] = ['NM_01234', 'NP_4456']
+            AlleleDescriptive(**ad_v600e)
+        with pytest.raises(AssertionError):
+            ad_v600e['refseq_protein'] = 'NM_4456'
+            AlleleDescriptive(**ad_v600e)
+        with pytest.raises(AssertionError):
+            ad_v600e['refseq_protein'] = ['NP_01234', 'NM_4456']
+            AlleleDescriptive(**ad_v600e)
+        ad_v600e['refseq_protein'] = ['NP_01234', 'NP_4456']
+        assert AlleleDescriptive(**ad_v600e)
+
+    def test_valid_transcript_reference_format(self, ad_v600e):
+        # All entries start with NM_*
+        with pytest.raises(AssertionError):
+            ad_v600e['refseq_transcript'] = ['NM_01234', 'NP_4456']
+            AlleleDescriptive(**ad_v600e)
+        with pytest.raises(AssertionError):
+            ad_v600e['refseq_transcript'] = 'NP_01234'
+            AlleleDescriptive(**ad_v600e)
+        with pytest.raises(AssertionError):
+            ad_v600e['refseq_transcript'] = ['NP_01234', 'NM_4456']
+            AlleleDescriptive(**ad_v600e)
+        ad_v600e['refseq_transcript'] = ['NM_01234', 'NM_4456']
+        assert AlleleDescriptive(**ad_v600e)
+
     def test_genome_version(self, ad_v600e):
         # Expecting a string
         with pytest.raises(AssertionError):
