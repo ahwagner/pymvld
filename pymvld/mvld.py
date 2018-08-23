@@ -27,6 +27,10 @@ class AlleleDescriptive:
         else:
             object.__setattr__(self, 'refseq_protein', tuple(self.refseq_protein))
 
+        # Genome Version
+        assert isinstance(self.genome_version, str), "Expected a string for genome version"
+        assert self.genome_version in self.GENOME_VERSIONS, "Expected a value of GRCh37/GRCh38"
+
         # RefSeq Transcript Testing
         assert all([TRANSCRIPT_RE.match(x) for x in self.refseq_transcript]), \
             "Expected all RefSeq transcripts to be of form NM_*."
@@ -34,10 +38,6 @@ class AlleleDescriptive:
         # RefSeq Protein Testing
         assert all([PROTEIN_RE.match(x) for x in self.refseq_protein]), \
             "Expected all RefSeq proteins to be of form NP_*."
-
-        # Genome Version
-        assert isinstance(self.genome_version, str), "Expected a string for genome version"
-        assert self.genome_version in self.GENOME_VERSIONS, "Expected a value of GRCh37/GRCh38"
 
 @dataclass
 class AlleleInterpretive:
