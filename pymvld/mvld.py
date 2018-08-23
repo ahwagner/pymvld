@@ -2,8 +2,9 @@ from dataclasses import dataclass
 from typing import Tuple
 import re
 
-TRANSCRIPT_RE = re.compile(r'NM_\d+(\.\d+)?')
-PROTEIN_RE = re.compile(r'NP_\d+(\.\d+)?')
+TRANSCRIPT_RE = re.compile(r'NM_\d+(\.\d+)?$')
+PROTEIN_RE = re.compile(r'NP_\d+(\.\d+)?$')
+GENOME_VERSION_RE = re.compile(r'GRCh3(7|8)(\.p\d+)?$')
 
 @dataclass(frozen=True)
 class AlleleDescriptive:
@@ -29,7 +30,8 @@ class AlleleDescriptive:
 
         # Genome Version
         assert isinstance(self.genome_version, str), "Expected a string for genome version"
-        assert self.genome_version in self.GENOME_VERSIONS, "Expected a value of GRCh37/GRCh38"
+        assert GENOME_VERSION_RE.match(self.genome_version), \
+            "Expected a value of GRCh37/GRCh38, with optional .pXX version"
 
         # RefSeq Transcript Testing
         assert all([TRANSCRIPT_RE.match(x) for x in self.refseq_transcript]), \

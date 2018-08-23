@@ -55,6 +55,16 @@ class TestAlleleDescriptive():
         with pytest.raises(AssertionError):
             ad_v600e['genome_version'] = 'mm9'
             AlleleDescriptive(**ad_v600e)
+        # Disallows non 37, 38 assemblies
+        with pytest.raises(AssertionError):
+            ad_v600e['genome_version'] = 'GRCh36'
+            AlleleDescriptive(**ad_v600e)
+        # Accepts versioning
+        ad_v600e['genome_version'] = 'GRCh38.p12'
+        assert AlleleDescriptive(**ad_v600e)
+        with pytest.raises(AssertionError):
+            ad_v600e['genome_version'] = 'GRCh38.x12'
+            AlleleDescriptive(**ad_v600e)
 
     def test_valid_protein_reference_format(self, ad_v600e):
         # All entries start with NP_*
@@ -83,7 +93,6 @@ class TestAlleleDescriptive():
             AlleleDescriptive(**ad_v600e)
         ad_v600e['refseq_transcript'] = ['NM_01234', 'NM_4456']
         assert AlleleDescriptive(**ad_v600e)
-
 
 
 class TestAlleleInterpretive():
