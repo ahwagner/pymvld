@@ -1,10 +1,10 @@
 # pyMVLD
-pyMVLD is a Python implementation of the Minimum Variant Level Data standard, first defined by the ClinGen Somatic Working Group in 2016 ([paper](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-016-0367-z)).
+pyMVLD is a Python implementation of the Minimum Variant Level Data framework of standardized data elements, first defined by the ClinGen Somatic Working Group in 2016 ([paper](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-016-0367-z)).
 
 ![MVLD Figure](https://media.springernature.com/full/springer-static/image/art%3A10.1186%2Fs13073-016-0367-z/MediaObjects/13073_2016_367_Fig3_HTML.gif)
 
 ## Why use pyMVLD
-pyMVLD provides a concrete implementation for ensuring compliance with the MVLD standard. Use of this module provides:
+pyMVLD is an implementation for ensuring compliance with the MVLD framework. Use of this module provides:
 * Validation of correct data types and values when generating MVLD objects
 * Immutable, standardized objects for downstream applications
 * Framework versioning
