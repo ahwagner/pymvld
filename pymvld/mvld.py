@@ -1,10 +1,13 @@
 from dataclasses import dataclass
 from typing import Tuple
+from pymvld.gene import HGNC
 import re
 
 TRANSCRIPT_RE = re.compile(r'NM_\d+(\.\d+)?$')
 PROTEIN_RE = re.compile(r'NP_\d+(\.\d+)?$')
 GENOME_VERSION_RE = re.compile(r'GRCh3(7|8)(\.p\d+)?$')
+
+GENES = HGNC()
 
 @dataclass(frozen=True)
 class AlleleDescriptive:
@@ -32,6 +35,14 @@ class AlleleDescriptive:
         assert isinstance(self.genome_version, str), "Expected a string for genome version"
         assert GENOME_VERSION_RE.match(self.genome_version), \
             "Expected a value of GRCh37/GRCh38, with optional .pXX version"
+
+        # Gene
+        assert isinstance(self.gene, str), "Expected a string for gene"
+        lookup = GENES.lookup(self.gene)
+        assert lookup is not None, "Gene is not a recognized HGVS approved Gene Symbol or alias"
+        if lookup.type == 'Approved':
+            pass
+        # TODO: Add other types--likely alias, retired, etc.
 
         # RefSeq Transcript Testing
         assert all([TRANSCRIPT_RE.match(x) for x in self.refseq_transcript]), \
